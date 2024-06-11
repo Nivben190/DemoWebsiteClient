@@ -1,8 +1,15 @@
 import { useState } from 'react'
 import './App.css'
+import { UserService } from './services/userSevice';
 
 function App() {
-  const [count, setCount] = useState(0)
+ const [userName, setUserName] = useState('')
+  //call the user service login and set the user name from login response
+   const userService = new UserService();
+  userService.login('niv', 'nivben2000').then((response) => {
+    setUserName(response); 
+  } 
+  );
 
   return (
     <>
@@ -12,18 +19,8 @@ function App() {
         <a href="https://react.dev" target="_blank">
         </a>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <h1>My Website </h1>
+      <p>User Name : {userName}</p>
     </>
   )
 }
